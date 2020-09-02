@@ -122,3 +122,65 @@ Do you want to proceed? (y/n): y
 Your call!
 ALTER TABLE
 Time: 0.003s
+
+CompanyDatabase> CREATE TABLE "Departments" (
+ "Id"  SERIAL PRIMARY KEY,
+ "DepartmentName" TEXT,
+ "Building" TEXT
+ );
+CREATE TABLE
+Time: 0.025s
+
+ALTER TABLE "Employee" ADD COLUMN "DepartmentId" INTEGER NULL REFERENCES "Departments" ("Id");
+
+CREATE TABLE "Products"(
+    "Id"          SERIAL PRIMARY KEY,
+    "Price"       DOUBLE PRECISION,
+    "Name"  TEXT,
+    "Description" TEXT,
+    "QuantityInStock" INT
+    );
+
+     CREATE TABLE "Orders"(
+     "Id"          SERIAL PRIMARY KEY,
+     "OrderNumber"       TEXT,
+     "DatePlaced"  DATE,
+     "Email" TEXT
+     );
+
+ CREATE TABLE "ProductOrders"( "Id" SERIAL PRIMARY KEY, "Or
+ derQuantity" INT);
+
+INSERT INTO "Departments" ("DepartmentName" , "Building" ) VALUES ('Development' , 'Main');
+
+INSERT INTO "Departments" ("DepartmentName" , "Building" ) VALUES ('Marketing' , 'North');
+
+INSERT INTO "Employee" ("FullName","Salary","JobPosition","PhoneExtension","IsPartTime" , "DepartmentI
+ d")
+ VALUES ('Tim Smith','40000','Programmer','123','N' , '1');
+
+INSERT INTO "Employee" ("FullName","Salary","JobPosition","PhoneExtension","IsPartTime" , "DepartmentI
+ d")
+ VALUES ('Barbara Ramsey','80000','Manager','234','N' , '1');
+
+ INSERT INTO "Employee" ("FullName","Salary","JobPosition","PhoneExtension","IsPartTime" , "DepartmentI
+ d")
+ VALUES ('Tom Jones','32000','Admin','456','Y' , '2');
+
+INSERT INTO "Products" ("Price" , "Name" , "Description" , "QuantityInStock")
+ VALUES ('12.45' , 'Widget' , 'The Original Widget' , '100');
+
+ INSERT INTO "Products" ("Price" , "Name" , "Description" , "QuantityInStock")
+ VALUES ('99.99' , 'Flowbee' , 'Perfect for haircuts' , '3');
+
+ INSERT INTO "Orders" ("OrderNumber" , "DatePlaced" , "Email")
+ VALUES ('X529' , '2020-01-01' , 'person@example.com');
+
+
+ALTER TABLE "ProductOrders"  ADD COLUMN "ProductId" INTEGER REFERENCES "Products" ("Id");
+
+ALTER TABLE "ProductOrders"  ADD COLUMN "OrderId" INTEGER REFERENCES "Orders" ("Id");
+
+INSERT INTO "ProductOrders" ("OrderQuantity" , "ProductId" , "OrderId" ) VALUES ( '3' , '1' , '1');
+
+ INSERT INTO "ProductOrders" ("OrderQuantity" , "ProductId" , "OrderId" ) VALUES ( '2' , '2' , '1');
